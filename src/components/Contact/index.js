@@ -130,15 +130,16 @@ const Contact = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    console.log('Form Data:', form.current); // Log form data
     emailjs.sendForm('service_tox7kqs', 'template_nv7k7mj', form.current, 'SybVGsYS52j2TfLbi')
       .then((result) => {
+        console.log('Email Sent:', result); // Log success response
         setOpen(true);
         form.current.reset();
       }, (error) => {
-        console.log(error.text);
+        console.log('Email Error:', error.text); // Log error response
       });
   }
-
 
 
   return (
@@ -147,13 +148,14 @@ const Contact = () => {
         <Title>Contact</Title>
         <Desc>Feel free to reach out to me for any questions or opportunities!</Desc>
         <ContactForm ref={form} onSubmit={handleSubmit}>
-          <ContactTitle>Email Me 🚀</ContactTitle>
-          <ContactInput placeholder="Your Email" name="from_email" />
-          <ContactInput placeholder="Your Name" name="from_name" />
-          <ContactInput placeholder="Subject" name="subject" />
-          <ContactInputMessage placeholder="Message" rows="4" name="message" />
-          <ContactButton type="submit" value="Send" />
-        </ContactForm>
+        <ContactTitle>Email Me 🚀</ContactTitle>
+        <ContactInput placeholder="Your Email" name="from_email" />
+        <ContactInput placeholder="Your Name" name="from_name" />
+        <ContactInput placeholder="Subject" name="subject" />
+        <ContactInputMessage placeholder="Message" rows="4" name="message" />
+        <input type="hidden" name="to_email" value="11shivam00@gmail.com" />
+        <ContactButton type="submit" value="Send" />
+      </ContactForm>
         <Snackbar
           open={open}
           autoHideDuration={6000}
